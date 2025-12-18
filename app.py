@@ -81,29 +81,56 @@ try:
         st.dataframe(filtered_df, use_container_width=True)
 
         st.write("### 🛠️ 내역 수정하기 ###")
-        option = st.selectbox(
-            "수정할 내역을 선택하세요",
-            df["ID"].astype(str)
-            + "."
-            + df["Item"]
-            + "("
-            + df["Amount"].astype(str)
-            + ")",
-        )
 
-        selected_seq = option.split(".")[0]
+        if not df.empty:
+            option = st.selectbox(
+                "수정/삭제할 내역을 선택하세요",
+                df["ID"].astype(str) + ". " + df["Item"] + " (" + df["Amount"] + ")",
+            )
 
-        if st.button("✏️ 수정하러 가기"):
-            st.write("selected_seq" + selected_seq)
-            st.session_state["edit_seq"] = selected_seq
+            if option:
+                selected_seq = option.split(".")[0]
 
-            st.switch_page("pages/03_✏️_수정하기.py")
+                # 버튼들을 예쁘게 가로로 배치
+                col1, col2 = st.columns(2)
 
-        if st.button(" 삭제하러 가기"):
-            st.write("delete_seq" + selected_seq)
-            st.session_state["delete_seq"] = selected_seq
+                with col1:
+                    if st.button("✏️ 수정하러 가기"):
+                        st.session_state["edit_seq"] = selected_id
+                        st.switch_page("pages/03_✏️_수정하기.py")
 
-            st.switch_page("pages/04_🗑️_삭제하기.py")
+                with col2:
+                    if st.button("🗑️ 삭제하러 가기"):
+                        st.session_state["delete_seq"] = selected_id
+                        st.switch_page("pages/04_🗑️_내역_삭제.py")
+            else:
+                st.info(
+                    "💡 아직 등록된 지출 내역이 없습니다. 왼쪽 사이드바에서 추가해주세요!"
+                )
+
+        # option = st.selectbox(
+        #     "수정할 내역을 선택하세요",
+        #     df["ID"].astype(str)
+        #     + "."
+        #     + df["Item"]
+        #     + "("
+        #     + df["Amount"].astype(str)
+        #     + ")",
+        # )
+
+        # selected_seq = option.split(".")[0]
+
+        # if st.button("✏️ 수정하러 가기"):
+        #     st.write("selected_seq" + selected_seq)
+        #     st.session_state["edit_seq"] = selected_seq
+
+        #     st.switch_page("pages/03_✏️_수정하기.py")
+
+        # if st.button(" 삭제하러 가기"):
+        #     st.write("delete_seq" + selected_seq)
+        #     st.session_state["delete_seq"] = selected_seq
+
+        #     st.switch_page("pages/04_🗑️_삭제하기.py")
 
     # -------------------------------------------------------
     # 4. 다운로드 버튼 (★여기가 문제였을 수 있음!)
