@@ -85,7 +85,12 @@ try:
         if not df.empty:
             option = st.selectbox(
                 "수정/삭제할 내역을 선택하세요",
-                df["ID"].astype(str) + ". " + df["Item"] + " (" + df["Amount"] + ")",
+                df["ID"].astype(str)
+                + ". "
+                + df["Item"]
+                + " ("
+                + df["Amount"].astype(str)
+                + ")",
             )
 
             if option:

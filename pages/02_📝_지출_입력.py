@@ -2,7 +2,7 @@ import streamlit as st
 import db_connect as db
 from datetime import datetime
 
-st.title("가로 길이 조절 테스트")
+st.title("지출 입력")
 col_main, col_empty1, col_empty2 = st.columns([3, 1, 1])
 
 now = datetime.now()
@@ -23,9 +23,9 @@ with col_main:
 
 # DB 저장 추가할 예정
 df = db.get_data_from_db()
-
-if df is not None and not df.empty:
-    if st.button("DB에 저장하기"):
+# if df is not None and not df.empty:
+with st.form("input_form"):
+    if st.form_submit_button("DB에 저장하기"):
         db = db.insert_data(
             values_1,
             values_2,
@@ -37,5 +37,5 @@ if df is not None and not df.empty:
             #            values_8,
             values_5,
         )
-        st.success("삭제되었습니다! 🚀")
+        st.success("입력되었습니다! 🚀")
         st.switch_page("app.py")
