@@ -115,7 +115,7 @@ try:
                 with col1:
                     if st.button("✏️ 수정하러 가기"):
                         st.session_state["edit_seq"] = selected_seq
-                        st.switch_page(current_dir + "03_✏️_수정하기.py")
+                        st.switch_page(current_dir + "/03_✏️_수정하기.py")
 
                 with col2:
                     if st.button("🗑️ 삭제하러 가기"):
@@ -175,8 +175,11 @@ try:
 
     # 여기 안에서는 .sidebar 안 붙여도 알아서 들어갑니다
     st.page_link("app.py", label="🏠 홈으로", icon="🏠")
-    st.page_link("pages/02_📝_지출_입력.py", label="➕ 지출 입력", icon="📝")
-#    st.page_link("pages/edit.py", label="지출 수정", icon="📝")
+    st.page_link(current_dir + "/02_📝_지출_입력.py", label="➕ 지출 입력", icon="📝")
+    st.session_state["edit_seq"] = selected_seq
+    st.page_link(current_dir + "/03_✏️_수정하기.py", label="지출 수정", icon="📝")
+    st.session_state["delete_seq"] = selected_seq
+    st.page_link(current_dir + "/04_🗑️_삭제하기.py", label="지출 삭제", icon="🗑️")
 
 # st.sidebar.download_button(
 #    label="지출입력",
