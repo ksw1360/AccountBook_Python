@@ -17,7 +17,7 @@ try:
     target_row = df[df["ID"] == int(ID)].iloc[0]
 
     with st.form("delete_form"):
-        del_seq = st.number_input("ID", value=target_row["ID"])
+        # del_seq = st.number_input("ID", value=target_row["ID"])
         st.write(f"### ⚠️ 정말 삭제하시겠습니까?")
         st.write(f"내역: **{target_row['Item']}**")
         st.write(f"금액: **{target_row['Amount2']}**")

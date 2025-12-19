@@ -4,11 +4,11 @@ from datetime import datetime
 import pandas as pd
 
 st.title("✏️ 지출 내역 수정")
-st.write("1")
+
 
 try:
-    st.write("2")
-    st.write(st.session_state)
+
+    # st.write(st.session_state)
     # 1. 짐 풀기 (가져온 ID 확인)
     if "edit_seq" not in st.session_state:
         st.error("잘못된 접근입니다. 대시보드에서 선택해주세요.")
