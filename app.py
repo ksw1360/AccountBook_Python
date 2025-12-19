@@ -3,6 +3,7 @@ import db_connect as db
 import pandas as pd
 import io
 import subprocess
+import os
 
 st.set_page_config(page_title="우리집 가계부", page_icon="💰", layout="wide")
 
@@ -82,7 +83,7 @@ try:
 
         st.write("### 🛠️ 내역 수정하기 ###")
 
-        if not df.empty:
+        if not filtered_df.empty:
             option = st.selectbox(
                 "수정/삭제할 내역을 선택하세요",
                 df["ID"].astype(str)
@@ -94,20 +95,32 @@ try:
             )
 
             if option:
-                selected_seq = option.split(".")[0]
+                selected_seq = int(option.split(".")[0])
+
+                # 스크립트 파일이 있는 폴더를 기준으로 절대 경로 만들기
+                current_dir = os.path.dirname(
+                    os.path.abspath("pages/04_🗑️_삭제하기.py")
+                )  # 스크립트 있는 폴더
+
+                st.write("current_dir: " + current_dir)
+
+                st.write(f"선택된 내역 번호: **{selected_seq}번**")
+                # import streamlit as st
+
+                # st.sidebar.page_link(page="pages/bia.py", label="IA")
 
                 # 버튼들을 예쁘게 가로로 배치
                 col1, col2 = st.columns(2)
 
                 with col1:
                     if st.button("✏️ 수정하러 가기"):
-                        st.session_state["edit_seq"] = selected_id
-                        st.switch_page("pages/03_✏️_수정하기.py")
+                        st.session_state["edit_seq"] = selected_seq
+                        st.switch_page(current_dir + "03_✏️_수정하기.py")
 
                 with col2:
                     if st.button("🗑️ 삭제하러 가기"):
-                        st.session_state["delete_seq"] = selected_id
-                        st.switch_page("pages/04_🗑️_내역_삭제.py")
+                        st.session_state["delete_seq"] = selected_seq
+                        st.switch_page(current_dir + "/04_🗑️_삭제하기.py")
             else:
                 st.info(
                     "💡 아직 등록된 지출 내역이 없습니다. 왼쪽 사이드바에서 추가해주세요!"
