@@ -38,8 +38,30 @@ def init_db():
     conn.close()
 
 
+def init_db2():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # 수입 테이블 만들기
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS income (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            amount INTEGER,
+            source TEXT,
+            author TEXT,
+            date TEXT
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
+
 # 앱 실행될 때마다 테이블 있는지 확인 (맨 처음에만 실행됨)
 init_db()
+init_db2()
 
 
 # =========================================================

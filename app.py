@@ -76,7 +76,6 @@ try:
     with col1:
         st.write("### 📊 지출 요약")
         total_amount = filtered_df["Amount"].sum()
-        # income_total = db.get_total_income()  # 총 수입 가져오기
         income_total = db.get_total_income()  # 총 수입 가져오기
         st.metric("총 수입", f"{income_total:,} 원")
         rest_amount = income_total - total_amount
