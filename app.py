@@ -157,6 +157,9 @@ try:
         label="🗑️ 지출 삭제",
         icon="🗑️",
     )
+    st.sidebar.page_link(
+        os.path.join(script_dir, "pages", "board.py"), label="📢 미니 게시판", icon="📢"
+    )
 
 except Exception as e:
     st.error(f"앗! 오류가 발생했어요: {e}")
