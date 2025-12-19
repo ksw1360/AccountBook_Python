@@ -6,6 +6,7 @@ from openpyxl.chart import BarChart, Reference
 from openpyxl.utils.dataframe import dataframe_to_rows
 from io import BytesIO
 import os
+import sys
 
 # ----------------------------- 페이지 설정 -----------------------------
 st.set_page_config(page_title="우리집 가계부", page_icon="💰", layout="wide")
@@ -75,6 +76,11 @@ try:
     with col1:
         st.write("### 📊 지출 요약")
         total_amount = filtered_df["Amount"].sum()
+        # income_total = db.get_total_income()  # 총 수입 가져오기
+        income_total = db.get_total_income()  # 총 수입 가져오기
+        st.metric("총 수입", f"{income_total:,} 원")
+        rest_amount = income_total - total_amount
+        st.metric("남은 금액", f"{rest_amount:,} 원")
         st.metric("선택된 카드 총 지출", f"{total_amount:,} 원")
 
     with col2:
@@ -159,6 +165,11 @@ try:
     )
     st.sidebar.page_link(
         os.path.join(script_dir, "pages", "board.py"), label="📢 미니 게시판", icon="📢"
+    )
+    st.sidebar.page_link(
+        os.path.join(script_dir, "pages", "05_🎁_수입입력.py"),
+        label="🎁 수입 입력",
+        icon="🎁",
     )
 
 except Exception as e:

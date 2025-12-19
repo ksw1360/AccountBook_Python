@@ -128,3 +128,15 @@ def delete_data(id_val):
     cursor.execute(sql, (id_val,))  # 튜플 형태 주의 (id_val,)
     conn.commit()
     conn.close()
+
+
+# =========================================================
+# 6. 수입 총합 함수
+# =========================================================
+def get_total_income():
+    conn = sqlite3.connect("income.db")
+    query = "SELECT SUM(amount) FROM income where date LIKE ?"
+    today_str = datetime.now().strftime("%Y-%m-%d") + "%"
+    total = pd.read_sql_query(query, conn, params=(today_str,)).iloc[0, 0]
+    conn.close()
+    return total if total is not None else 0
