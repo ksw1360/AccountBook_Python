@@ -38,4 +38,4 @@ with st.form("input_form"):
             values_5,
         )
         st.success("입력되었습니다! 🚀")
-        st.switch_page("app.py")
+        st.switch_page("pages/app.py")

@@ -25,7 +25,7 @@ try:
         if st.form_submit_button("삭제 완료"):
             db.delete_data(ID)
             st.success("삭제되었습니다! 🚀")
-            st.switch_page("app.py")
+            st.switch_page("pages/app.py")
 
 
 except Exception as e:

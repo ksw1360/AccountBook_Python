@@ -44,7 +44,7 @@ try:
             st.success("수정되었습니다! 🚀")
 
             # 다시 대시보드로 복귀
-            st.switch_page("app.py")
+            st.switch_page("pages/app.py")
 
 except Exception as e:
     st.error(f"에러가 발생했습니다 ㅠㅠ: {e}")
